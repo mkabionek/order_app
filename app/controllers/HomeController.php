@@ -1,15 +1,15 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: michalkabionek
+ * userController: michalkabionek
  * Date: 15.12.2017
  * Time: 11:31
  */
 
-class Home extends Controller {
+class HomeController extends Controller {
 
     public function index($name = ''){
-//        $user = $this->model('User');
+//        $user = $this->model('userController');
 //        $user->data = $name;
 
 //        $result = $user->find($name);

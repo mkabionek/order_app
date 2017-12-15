@@ -3,7 +3,7 @@
         <div class="login-block">
 
 
-            <form class="login-form" method="POST" action="">
+            <form class="login-form" method="POST" action="/user/create">
                 <div class="field"><h1>Sign up</h1></div>
                 <div id="error-explanation">
 <!--                    --><?php //foreach ($user->getErrors() as $error) {
@@ -12,19 +12,19 @@
                 </div>
                 <div class="field">
                     <label for="username" >Username:</label>
-                    <input type="text" name="username" placeholder="Username" id="username" required/>
+                    <input type="text" name="username" placeholder="Username" id="username" />
                 </div>
                 <div class="field">
                     <label for="email" >Email:</label>
-                    <input type="email" name="email" placeholder="e-mail" id="email" required />
+                    <input type="email" name="email" placeholder="e-mail" id="email"  />
                 </div>
                 <div class="field">
                     <label for="password" >Password:</label>
-                    <input type="password" name="password" placeholder="Password" id="password" required />
+                    <input type="password" name="password" placeholder="Password" id="password"  />
                 </div>
                 <div class="field">
                     <label for="password-confirmation" >Confirm Password:</label>
-                    <input type="password" name="password-confirmation" placeholder="Confirm password" id="password-confirmation" required />
+                    <input type="password" name="password-confirmation" placeholder="Confirm password" id="password-confirmation"  />
                 </div>
 
                 <div class="field">

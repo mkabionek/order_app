@@ -20,8 +20,20 @@
         </div>
         <div class="right">
             <ul>
-                <li><a href='/user/login'>Login</a></li>
-                <li><a href='/user/register'>Register</a></li>
+                <?php
+                if(isset($_SESSION['username'])){
+                    echo "<ul>";
+                    echo "<li><a href='/order/new'><span class='hidden'> New order</span></a></li>";
+                    echo "<li><a href='/user/edit'><span class='hidden'> Settings</span></a></li>";
+                    echo "<li><a href='/user/logout'><span class='hidden'> Logout</span></a></li>";
+                    echo "</ul>";
+                } else{
+                    echo "<li><a href='/user/login'>Login</a></li>";
+                    echo "<li><a href='/user/register'>Register</a></li>";
+                }
+                ?>
+<!--                <li><a href='/user/login'>Login</a></li>-->
+<!--                <li><a href='/user/register'>Register</a></li>-->
             </ul>
         </div>
     </div>
