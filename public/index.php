@@ -5,7 +5,7 @@
  * Date: 15.12.2017
  * Time: 11:25
  */
-
+session_start();
 require_once '../app/init.php';
 
 error_reporting(E_ALL);
