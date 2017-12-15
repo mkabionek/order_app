@@ -133,11 +133,12 @@ object {
 
 
 
-
+.col-sm-6 {width: 46%; margin: 1% }
 
 @media (max-width: 768px) {
     .col-sm-12 {width: 100%; margin-bottom: 30px;}
     .col-sm-4 {margin-bottom: 30px;}
+
 }
 
 @media (min-width: 768px) {
@@ -145,7 +146,9 @@ object {
         width: 750px;
     } 
     .col-sm-4 {width: 31%; margin: 1.16%}
+
     .col-sm-12 {width: 100%; margin-bottom: 30px;}
+
 
 }
 @media (min-width: 992px) {
@@ -153,8 +156,11 @@ object {
         width: 970px;
     }
 
+
+    .order-block{ max-width: 50%;}
     .col-md-3 {width: 23%; margin: 1%;}
     .col-md-4 {width: 31%; margin: 1%;}
+    .col-md-6 {width: 46%; margin: 1% }
     .col-md-8 {width: 65%; margin: 1%;}
 
     
@@ -205,11 +211,11 @@ object {
     vertical-align: middle;
 }
 
-.login-form .field{
+.login-form .field, .form .field{
     padding: 10px;
 }
 
-.login-block h1{
+form h1{
     text-align: center;
     color: #fafafa;
     margin: 0;
@@ -219,7 +225,7 @@ object {
     color: #e6e6e6;
 }
 
-.login-block input{
+.login-block input, .order-block input{
     width:100%;
     padding:10px;
     margin: 5px 0;
@@ -282,7 +288,12 @@ button.btn{
 
 
 
-
+.order-block{
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
 
 
 .form.block{
@@ -296,7 +307,7 @@ button.btn{
     text-align: center; 
 }
 
-.form.block input, .form.block textarea{
+.form.block input, .form.block textarea, .order-block textarea{
     width:100%;
     padding:10px;
     margin: 5px 0;
@@ -304,7 +315,7 @@ button.btn{
     box-sizing: border-box;
     outline: none;
 }
-.form.block label {
+.form.block label, .field label {
     display: block;
     color: #fafafa;
     margin-bottom: 10px;

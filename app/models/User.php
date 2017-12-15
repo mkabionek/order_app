@@ -6,9 +6,7 @@
  * Time: 13:08
  */
 
-class User extends Model
-{
-    public $name;
+class User extends Model {
 
     public function __construct(){
         parent::__construct();
@@ -18,6 +16,10 @@ class User extends Model
         if(isset($_SESSION['user_id'])){
             return true;
         }
+    }
+
+    public function get_id(){
+        return $_SESSION['user_id'];
     }
 
     public function find_by_email($email){
