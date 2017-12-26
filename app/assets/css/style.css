@@ -1,5 +1,5 @@
 html, body{
-    background-color: rgb(33, 46, 59);;
+    background-color: rgb(33, 46, 59);
     min-height: 100%;
     height: 100%;
     margin:0;
@@ -353,4 +353,37 @@ button.btn{
     outline: none;
     /* border-color: rgb(235, 233, 233); */
     border: 1px solid rgba(143, 143, 143, 0.329);
+}
+
+
+
+
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+.orders-table thead{
+    border-radius: 3px;
+    background-color: #1fa67a;
+    text-align: left;
+    padding: 5px;
+}
+.orders-table th {
+    color: #fafafa;
+    padding: 10px 5px;
+}
+.orders-table td {
+
+    padding: 5px;
+    /*border: 1px solid rgb(33, 46, 59);;*/
+}
+
+.orders-table tbody tr {
+    background: #f9f9f9;
+}
+
+tbody tr:nth-child(2n) {
+    background-color: #fcfcfc;
 }

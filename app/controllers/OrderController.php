@@ -15,6 +15,7 @@ class OrderController extends Controller {
         }else {
             $orderModel = $this->model('Order');
             $result = $orderModel->all($user->get_id());
+
             $this->partial("header");
             $this->view('order/index', ["orders" => $result]);
             $this->partial("footer");
@@ -28,6 +29,7 @@ class OrderController extends Controller {
         }
         $orderModel = $this->model('Order');
         $order = $orderModel->find_by_id($params);
+
         if ($order){
             $this->partial("header");
             $this->view('order/show', ["order" => $order]);
@@ -38,6 +40,11 @@ class OrderController extends Controller {
     }
 
     public function add(){
+        $user = $this->model('User');
+        if (!$user->is_logged_in()){
+            $this->redirect("/");
+        }
+
         $this->partial("header");
         $orderModel = $this->model('Order');
         $categories = $orderModel->get_all_categories();
@@ -62,6 +69,24 @@ class OrderController extends Controller {
                 $this->redirect("/order/add");
             }
         }
+    }
+
+    public function accept($params=[]){
+        $user = $this->model('User');
+        if (!$user->is_logged_in() || $user->get_type() != User::$DESIGNER_TYPE){
+            $this->redirect("/");
+        }
+        $orderModel = $this->model('Order');
+        $a = $orderModel->set_designer($params,$user->get_designer_id());
+        // dopisać funkcje
+        if ($a) {
+            $this->redirect("/designer");
+        }else{
+            echo 'nie ok';
+        }
+//        $this->redirect('/designer');
+//        var_dump($params);
+//        print_r($_SESSION);
     }
 
 }

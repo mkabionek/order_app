@@ -9,13 +9,15 @@
 class HomeController extends Controller {
 
     public function index($name = ''){
-//        $user = $this->model('userController');
-//        $user->data = $name;
-
-//        $result = $user->find($name);
+        $user = $this->model('User');
 
         $this->partial("header");
-        $this->view('home/index');
+        if ($user->is_logged_in()){
+            $this->view('home/index');
+        }else {
+            $this->view('static/index');
+        }
+
         $this->partial("footer");
     }
 

@@ -7,6 +7,9 @@
  */
 
 class User extends Model {
+    public static $ADMIN_TYPE = 0;
+    public static $CLIENT_TYPE = 1;
+    public static $DESIGNER_TYPE = 2;
 
     public function __construct(){
         parent::__construct();
@@ -20,6 +23,14 @@ class User extends Model {
 
     public function get_id(){
         return $_SESSION['user_id'];
+    }
+
+    public function get_type(){
+        return $_SESSION['user_type'];
+    }
+
+    public function get_designer_id(){
+
     }
 
     public function find_by_email($email){
@@ -40,11 +51,13 @@ class User extends Model {
         return $result;
     }
 
+
+
     public function auth($data){
         $email = trim($data['email']);
         $password = trim($data['password']);
 
-        $query = "SELECT * FROM user WHERE email = :email";
+        $query = "SELECT * FROM user WHERE email = :email AND `active` = 1";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':email', $email);
         $stmt->execute();
@@ -54,6 +67,7 @@ class User extends Model {
             if(password_verify($password, $result['password'])){
                 $_SESSION['user_id'] = $result['id'];
                 $_SESSION['username'] = $result['username'];
+                $_SESSION['user_type'] = $result['type_id'];
                 return true;
             }else{
 //                $this->errors[] = "Invalid email or password";

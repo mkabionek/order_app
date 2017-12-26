@@ -14,32 +14,27 @@
 <body>
 <header class="nav">
     <div class="container">
-        <div class="left">
-            <ul>
-                <?php  echo isset($_SESSION['username'])?
-                    " <li><a href='/order'><i class='fa fa-first-order fa-lg'></i> Home</a></li>":
-                    " <li><a href='/home'><i class='fa fa-first-order fa-lg'></i> Home</a></li>"
-                ?>
-            </ul>
-        </div>
-        <div class="right">
-            <ul>
-                <?php
-                if(isset($_SESSION['username'])){
-                    echo "<ul>";
-                    echo "<li><a href='/order/add'><span class='hidden'> New order</span></a></li>";
-                    echo "<li><a href='/user/edit'><span class='hidden'> Settings</span></a></li>";
-                    echo "<li><a href='/user/logout'><span class='hidden'> Logout</span></a></li>";
-                    echo "</ul>";
-                } else{
-                    echo "<li><a href='/user/login'>Login</a></li>";
-                    echo "<li><a href='/user/register'>Register</a></li>";
+        <?php
+            if(isset($_SESSION['username'])){
+    //
+                switch ($_SESSION['user_type']){
+                    case '0':
+                        include_once 'adminNav.php';
+                        break;
+
+                    case '1':
+                        include_once 'clientNav.php';
+                        break;
+                    case '2':
+                        include_once 'designerNav.php';
+                        break;
                 }
-                ?>
-<!--                <li><a href='/user/login'>Login</a></li>-->
-<!--                <li><a href='/user/register'>Register</a></li>-->
-            </ul>
-        </div>
+
+            } else{
+                include_once 'nav.php';
+            }
+
+        ?>
     </div>
 
 </header>

@@ -31,6 +31,40 @@ class Order extends Model {
         return $result;
     }
 
+    public function find_all_by_designer($designer_id = ''){
+        $query = "SELECT o.id as order_id, item_category.category, item_type.type, o.info, o.title, user.username FROM pai_project.`order` as o
+        INNER JOIN `item` on o.item_id = item.id 
+        INNER JOIN item_category on item.category_id = item_category.id
+        INNER JOIN item_type on item.type_id = item_type.id
+        INNER JOIN user on o.user_id = user.id";
+
+        if (empty($designer_id)){
+            $query .= " where designer_id is null";
+            $stmt = $this->db->prepare($query);
+        }else{
+            $query .= " where designer_id = :designer_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":designer_id", $designer_id);
+        }
+
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function set_designer($order_id, $designer_id){
+        $query = "UPDATE `pai_project`.`order`
+                  SET `designer_id` = :designer_id
+                  WHERE `id` = :order_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":designer_id", $designer_id);
+        $stmt->bindParam(":order_id", $order_id);
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    }
+
     public function find_by_id($id){
         $query = "SELECT o.id as order_id, o.title, o.description, o.thumbnail, 
         `order_status`.`id` as status_id, `status`, `url`, `category`, `type`, d.username as `designer_name` FROM `order` o 
