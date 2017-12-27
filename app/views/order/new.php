@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="order-block">
-            <form class="form" method="POST" action="/order/insert">
+            <form class="order-form" method="POST" action="/order/insert">
                 <div class="field"><h1>New order</h1></div>
                 <div class="field">
                     <label for="">Title</label>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="field">
-                    <button class="btn" id="login-btn">Add</button>
+                    <button class="btn">Add</button>
                 </div>
             </form>
         </div>

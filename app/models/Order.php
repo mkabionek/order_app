@@ -32,7 +32,7 @@ class Order extends Model {
     }
 
     public function find_all_by_designer($designer_id = ''){
-        $query = "SELECT o.id as order_id, item_category.category, item_type.type, o.info, o.title, user.username FROM pai_project.`order` as o
+        $query = "SELECT o.id as order_id, o.status_id, item_category.category, item_type.type, o.info, o.title, user.username FROM pai_project.`order` as o
         INNER JOIN `item` on o.item_id = item.id 
         INNER JOIN item_category on item.category_id = item_category.id
         INNER JOIN item_type on item.type_id = item_type.id
@@ -66,8 +66,8 @@ class Order extends Model {
     }
 
     public function find_by_id($id){
-        $query = "SELECT o.id as order_id, o.title, o.description, o.thumbnail, 
-        `order_status`.`id` as status_id, `status`, `url`, `category`, `type`, d.username as `designer_name` FROM `order` o 
+        $query = "SELECT o.id as order_id,o.user_id, o.title, o.description, o.thumbnail, 
+        `order_status`.`id` as status_id, `status`, `url`, `category`, `type`,item_id, d.username as `designer_name` FROM `order` o 
         INNER JOIN `item` on o.item_id = item.id 
         INNER JOIN item_category on item.category_id = item_category.id
         INNER JOIN item_type on item.type_id = item_type.id
@@ -150,6 +150,28 @@ class Order extends Model {
                 throw $e;
             }
         }
+    }
+
+    public function update(){
+        $order = $this->find_by_id($_POST['order_id']);
+
+        $query = "UPDATE `item`
+                  SET url = :url WHERE `id` = :item_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":url", $_POST['url']);
+        $stmt->bindParam(":item_id", $order['item_id']);
+        $stmt->execute();
+
+        $query = "UPDATE `order`
+                  SET `title` = :title, `thumbnail` = :thumbnail, `description` = :description
+                  WHERE `id` = :order_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":title", $_POST['title']);
+        $stmt->bindParam(":thumbnail", $_POST['thumbnail']);
+        $stmt->bindParam(":description", $_POST['description']);
+        $stmt->bindParam(":order_id", $_POST['order_id']);
+        $stmt->execute();
+
     }
 
 }

@@ -7,7 +7,8 @@
 <div class="right">
     <ul>
         <ul>
-            <li><a href='/designer'><span class='hidden'> Orders</span></a></li>
+            <li><a href='/designer'><span class='hidden'> New Orders</span></a></li>
+            <li><a href='/designer/orders'><span class='hidden'> My Orders</span></a></li>
 <!--            <li><a href='/user/edit'><span class='hidden'> Settings</span></a></li>-->
             <li><a href='/user/logout'><span class='hidden'> Logout</span></a></li>
         </ul>

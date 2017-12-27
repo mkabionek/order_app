@@ -2,7 +2,9 @@
     <div class="row">
         <div class="col-sm-12 col-md-8">
             <div class="thumbnail">
-                <object data='<?php echo $data['order']['url']; ?>' type=""></object>
+                <?php if (filter_var($data['order']['url'],FILTER_VALIDATE_URL)){
+                   echo "<object data='".$data['order']['url']."' type=''></object>";
+                }?>
             </div>
         </div>
 
@@ -18,9 +20,13 @@
                     <p class="description"><?php echo $data['order']['description']; ?></p>
                     <!-- <button id="show-mods">modify</button> -->
                     <div class="accept-div">
-
-                        <?php if($data['order']['status_id']== 0)
-                            echo "<a class='btn accept' id='accept-btn'><i class='fa fa-check'></i> Accept</a>";?>
+                        <?php
+                            if($data['order']['status_id']== 0){
+                                if (isset($_SESSION['user_id']) && $data['order']['user_id'] == $_SESSION['user_id']){
+                                    echo "<a class='btn accept' id='accept-btn'><i class='fa fa-check'></i> Accept</a>";
+                                }
+                            }
+                        ?>
                         <a class='btn download' href='<?php echo $data['order']['url']; ?>' download><i class='fa fa-download'></i> Download</a>
                     </div>
                 </div>

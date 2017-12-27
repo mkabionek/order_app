@@ -54,10 +54,12 @@ html, body{
     color: rgb(0, 87, 153);
 }
 .caption h3 a:hover{ color: rgb(0, 64, 109); }
-.caption h3 a{
+.caption h3 a, .orders-table a{
     text-decoration: none;
     color: rgb(0, 87, 153);
 }
+
+
 
 .caption h7 {
     color: #808080;
@@ -187,14 +189,14 @@ object {
  LOGIN  
 ====== */
 
-.login-block{
+.form-block{
     display: table;
     width: 100%;
     height: 100%;
     max-width: 400px;
     margin: 0 auto;
 }
-.login-block.green{
+.form-block.green{
     min-width:300px;
     max-width: 50%;
     min-height: 200px;
@@ -211,7 +213,7 @@ object {
     vertical-align: middle;
 }
 
-.login-form .field, .form .field{
+.login-form .field, .order-form .field{
     padding: 10px;
 }
 
@@ -225,7 +227,7 @@ form h1{
     color: #e6e6e6;
 }
 
-.login-block input, .order-block input{
+.form-block input, .order-block input{
     width:100%;
     padding:10px;
     margin: 5px 0;
@@ -296,7 +298,7 @@ button.btn{
 }
 
 
-.form.block{
+.order-form.block{
     min-width:300px;
     max-width: 50%;
     min-height: 200px;
@@ -307,21 +309,21 @@ button.btn{
     text-align: center; 
 }
 
-.form.block input, .form.block textarea, .order-block textarea{
+.order-form.block input, .order-form.block textarea, .order-block textarea{
     width:100%;
     padding:10px;
     margin: 5px 0;
-    text-align: center;
+    /*text-align: center;*/
     box-sizing: border-box;
     outline: none;
 }
-.form.block label, .field label {
+.order-form.block label, .field label {
     display: block;
     color: #fafafa;
     margin-bottom: 10px;
 }
 
-.form .group {
+.order-form .group {
     padding: 10px;
     margin-bottom: 10px;
 }
@@ -386,4 +388,8 @@ button.btn{
 
 tbody tr:nth-child(2n) {
     background-color: #fcfcfc;
+}
+
+.orders-table tr td:last{
+    text-align: center;
 }

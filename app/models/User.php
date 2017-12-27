@@ -29,8 +29,15 @@ class User extends Model {
         return $_SESSION['user_type'];
     }
 
-    public function get_designer_id(){
+    public function get_designer_id($user_id){
+        $query = "SELECT designer.id
+                  FROM designer where user_id = :user_id;";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->execute();
 
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['id'];
     }
 
     public function find_by_email($email){

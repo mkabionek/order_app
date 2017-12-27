@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="login-block">
+        <div class="form-block">
 
 
             <form class="login-form" method="POST" action="/user/create">

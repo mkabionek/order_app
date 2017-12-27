@@ -77,16 +77,43 @@ class OrderController extends Controller {
             $this->redirect("/");
         }
         $orderModel = $this->model('Order');
-        $a = $orderModel->set_designer($params,$user->get_designer_id());
-        // dopisać funkcje
+        $a = $orderModel->set_designer($params,$user->get_designer_id($_SESSION['user_id']));
         if ($a) {
             $this->redirect("/designer");
         }else{
             echo 'nie ok';
         }
-//        $this->redirect('/designer');
-//        var_dump($params);
-//        print_r($_SESSION);
+
+    }
+
+    public function edit($params = []){
+        $user = $this->model('User');
+        if (!$user->is_logged_in() || $user->get_type() != User::$DESIGNER_TYPE){
+            $this->redirect("/");
+        }
+        $orderModel = $this->model('Order');
+
+        $order = $orderModel->find_by_id($params);
+
+        $this->partial("header");
+        $this->view('order/edit', $order);
+        $this->partial("footer");
+    }
+
+    public function update(){
+        echo '<pre>';
+        print_r($_POST);
+        $user = $this->model('User');
+        if (!$user->is_logged_in() || $user->get_type() != User::$DESIGNER_TYPE || !isset($_POST) || empty($_POST)){
+            $this->redirect("/");
+        }
+
+        $orderModel = $this->model('Order');
+        if ($orderModel->update($_POST)){
+            echo "ok";
+        }else {
+            echo "nie ok";
+        }
     }
 
 }

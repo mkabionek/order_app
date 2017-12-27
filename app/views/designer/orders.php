@@ -6,27 +6,30 @@
                 <th>Title</th>
                 <th>Type</th>
                 <th>Category</th>
-                <th>Info</th>
                 <th>User</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
-<!--            <tr>-->
-                <?php
+            <?php
 //                echo '<pre>';
-//                print_r($data['orders']);
+//            print_r($data['orders']);
                 foreach ($data['orders'] as $order) {
-                    echo "<tr><td>".$order['title']."</td>";
+                    echo "<tr><td><a href='/order/show/".$order['order_id']."'>".$order['title']."</a></td>";
                     echo "<td>".$order['type']."</td>";
                     echo "<td>".$order['category']."</td>";
-                    echo "<td>".$order['info']."</td>";
                     echo "<td>".$order['username']."</td>";
-                    echo "<td><form action='/order/accept/".$order['order_id']."'><button class='btn'>Accept</button></form></td> </tr>";
-                }
-                ?>
+                    if ($order['status_id'] == 0){
+                        echo "<td><form action='/order/edit/".$order['order_id']."'><button class='btn'>Edit</button></form></td> ";
+                    }else{
+                        echo "<td>Order done</td>";
+                    }
+                    echo "</tr>";
 
+                }
+            ?>
             </tbody>
         </table>
+
     </div>
 </div>

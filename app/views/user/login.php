@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
 
-        <div class="login-block">
+        <div class="form-block">
             <form class="login-form" method="POST" action="/user/auth">
                 <div class="field"><h1>Login</h1></div>
                 <div class="field">
