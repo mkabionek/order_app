@@ -101,8 +101,6 @@ class OrderController extends Controller {
     }
 
     public function update(){
-        echo '<pre>';
-        print_r($_POST);
         $user = $this->model('User');
         if (!$user->is_logged_in() || $user->get_type() != User::$DESIGNER_TYPE || !isset($_POST) || empty($_POST)){
             $this->redirect("/");
@@ -110,9 +108,28 @@ class OrderController extends Controller {
 
         $orderModel = $this->model('Order');
         if ($orderModel->update($_POST)){
-            echo "ok";
+            $this->redirect("/designer/orders");
         }else {
-            echo "nie ok";
+            echo "Error";
+        }
+    }
+
+    public function getnote(){
+        $orderModel = $this->model('Order');
+        if ($note = $orderModel->get_note($_POST['order_id'])){
+            echo json_encode(array_slice($note, 2));
+        }else {
+            echo "Error";
+        }
+    }
+
+    public function updatenote(){
+        $orderModel = $this->model('Order');
+        print_r($_POST);
+        if ($orderModel->save_note($_POST)){
+            echo 'OK';
+        }else {
+            echo "Error";
         }
     }
 

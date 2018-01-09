@@ -155,22 +155,85 @@ class Order extends Model {
     public function update(){
         $order = $this->find_by_id($_POST['order_id']);
 
-        $query = "UPDATE `item`
+        $this->db->beginTransaction();
+        try{
+            $query = "UPDATE `item`
                   SET url = :url WHERE `id` = :item_id";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(":url", $_POST['url']);
-        $stmt->bindParam(":item_id", $order['item_id']);
-        $stmt->execute();
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":url", $_POST['url']);
+            $stmt->bindParam(":item_id", $order['item_id']);
+            $stmt->execute();
 
-        $query = "UPDATE `order`
+            $query = "UPDATE `order`
                   SET `title` = :title, `thumbnail` = :thumbnail, `description` = :description
                   WHERE `id` = :order_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":title", $_POST['title']);
+            $stmt->bindParam(":thumbnail", $_POST['thumbnail']);
+            $stmt->bindParam(":description", $_POST['description']);
+            $stmt->bindParam(":order_id", $_POST['order_id']);
+            $stmt->execute();
+
+            $this->db->commit();
+
+            return true;
+        }catch (PDOException $e){
+            $this->db->rollback();
+            throw $e;
+        }
+    }
+
+    public function get_note($order_id){
+        $query = "SELECT * FROM modification
+                  Where item_id = (
+                    SELECT item_id FROM `order`
+                    WHERE id = :order_id
+                  )";
         $stmt = $this->db->prepare($query);
-        $stmt->bindParam(":title", $_POST['title']);
-        $stmt->bindParam(":thumbnail", $_POST['thumbnail']);
-        $stmt->bindParam(":description", $_POST['description']);
-        $stmt->bindParam(":order_id", $_POST['order_id']);
+        $stmt->bindParam(":order_id", $order_id);
         $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
+    public function save_note($data){
+        $order_id = $data['order_id'];
+        $note = $data['note'];
+
+        if ($result = $this->get_note($order_id)){
+            // update
+            $query = "UPDATE `modification`
+                  SET `modification` = :note
+                  WHERE `id` = :note_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":note", $note);
+            $stmt->bindParam(":note_id", $result['id']);
+            if ($stmt->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }else {
+            // insert
+            $query = "INSERT INTO `modification` (`id`, `created_at`, `modification`, `item_id`)
+                      VALUES (
+                        null, 
+                        now(), 
+                        :note, 
+                        (SELECT item_id FROM `order` where id = :order_id)
+                      ) ";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(":note", $note);
+            $stmt->bindParam(":order_id", $order_id);
+            if ($stmt->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+
 
     }
 

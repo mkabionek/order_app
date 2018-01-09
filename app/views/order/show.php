@@ -12,7 +12,9 @@
             <div class="item">
                 <div class="caption">
                     <h3><?php echo $data['order']['title']; ?></h3>
+
                     <input id="order-id" type="hidden" value='<?php echo $data['order']['order_id'] ?>'>
+
                     <p class="field">Status: <?php echo $data['order']['status']; ?> </p>
                     <p class="field">Designer: <?php echo $data['order']['designer_name']; ?></p>
                     <p class="field">Category: <?php echo $data['order']['category']; ?> </p>
@@ -32,11 +34,60 @@
                 </div>
             </div>
 
-            <div class="modification item hidden" id="mod-div">
-                <textarea></textarea>
+            <div><p id='load-note'>Show notes</p></div>
+
+            <div class='modification item hidden' id='mod-div'>
+                <h4 >Notes to order</h4>
+                <textarea id='note'></textarea>
+                <button class='btn' id='save-note'>Save</button>
             </div>
 
         </div>
     </div>
 
 </div>
+<script>
+    var loadBtn = $('#load-note');
+    var saveBtn = $('#save-note');
+    var noteField = $('#note');
+    var noteBlock = $('#mod-div');
+
+
+    loadBtn.click(function (e) {
+        noteBlock.toggleClass('hidden');
+        var order_id = $('#order-id').val();
+        $.ajax({
+            type: "POST",
+            url: '/order/getnote',
+            data: {
+                'order_id': order_id
+            },
+            success: function (e) {
+                if (e === 'Error') {
+                    //
+                }else {
+                    var note = JSON.parse(e);
+                    noteField.val(note.modification);
+                }
+            }
+        });
+    })
+
+
+    saveBtn.click(function (e) {
+        var order_id = $('#order-id').val();
+        var note = $('#note').val();
+        $.ajax({
+            type: "POST",
+            url: '/order/updatenote',
+            data: {
+                'order_id': order_id,
+                'note': note
+            },
+            success: function (e) {
+                console.log(e)
+            }
+        });
+    })
+</script>
+
