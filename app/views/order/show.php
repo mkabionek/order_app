@@ -1,10 +1,14 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-8">
-            <div class="thumbnail">
+            <div class="thumbnail show">
                 <?php if (filter_var($data['order']['url'],FILTER_VALIDATE_URL)){
                    echo "<object data='".$data['order']['url']."' type=''></object>";
-                }?>
+                }else {
+                    echo "<h2>Content is not done yet.</h2>";
+                }
+                ?>
+
             </div>
         </div>
 
@@ -34,13 +38,13 @@
                 </div>
             </div>
 
-            <div><p id='load-note'>Show notes</p></div>
+            <?php
+                if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $data['order']['user_id'] && $data['order']['status_id']== 0){
+                    include_once 'mods.php';
+                }
+            ?>
 
-            <div class='modification item hidden' id='mod-div'>
-                <h4 >Notes to order</h4>
-                <textarea id='note'></textarea>
-                <button class='btn' id='save-note'>Save</button>
-            </div>
+
 
         </div>
     </div>
@@ -51,6 +55,12 @@
     var saveBtn = $('#save-note');
     var noteField = $('#note');
     var noteBlock = $('#mod-div');
+
+    var showDiv = $('.thumbnail.show');
+    var element = showDiv.children()[0];
+    if(element.tagName === "H2"){
+        showDiv.addClass('empty')
+    }
 
 
     loadBtn.click(function (e) {
@@ -72,7 +82,6 @@
             }
         });
     })
-
 
     saveBtn.click(function (e) {
         var order_id = $('#order-id').val();

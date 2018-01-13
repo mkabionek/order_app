@@ -1,8 +1,9 @@
-<div class="container">
-    <div class="row">
-        <?php
+<section class="last">
+    <div class="container">
+        <div class="row">
+            <?php
             foreach ($data['orders'] as $order) {
-                echo "<div class='col-sm-4 col-md-3'>";
+                echo "<div class='col-xs-6 flex col-sm-4 col-md-3'>";
                 echo "<div class='item'>";
                 echo "<div class='thumbnail'><img src='".$order['thumbnail']."'></div>";
 
@@ -16,6 +17,7 @@
                 echo "</div>";
                 echo "</div>";
             }
-        ?>
+            ?>
+        </div>
     </div>
-</div>
+</section>

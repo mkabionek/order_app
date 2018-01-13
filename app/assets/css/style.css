@@ -5,6 +5,17 @@ html, body{
     margin:0;
     padding: 0;
     font-family: 'Lato', sans-serif;
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+body{
+    position: relative;
+    margin: 0;
 }
 
 /* GENERAL STYLES*/
@@ -25,8 +36,84 @@ html, body{
     margin-top: 30px;
 }
 
+.jumbotron{
+    padding-bottom: 50px;
+}
+
+.jumbotron h1 {
+    font-size: 3.5em;
+    color: #fafafa;
+    /*color: #1fa67a;*/
+    font-family: Lato;
+    font-weight: 200;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.jumbotron p{
+    color: #1fa67a;
+    font-size: 1.3em;
+    font-family: Lato;
+    font-weight: 100;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.info .row{ margin-top: 0; }
+.info {
+    padding: 50px 0;
+    background-color: #f9f9fd;
+}
+
+.info h2{
+    text-align: center;
+    font-weight: 400;
+    margin-top: 0;
+    font-size: 2em;
+}
+
+.info .thumbnail img{
+    border-radius: 5px;
+}
+
+.desc p{
+    font-family: 'Lato', sans-serif;
+    font-size: 1.2em;
+}
+
+.desc p:first-of-type{
+    font-weight: 400;
+}
+
+.desc p:last-of-type{
+    font-weight: 200;
+}
 
 
+
+.info2 {
+    padding: 50px 0;
+    background-color: #f1f1f1;
+}
+
+.info2 .thumbnail{
+    font-size: 2em;
+    text-align: center;
+    color: #1fa67a;
+    padding-top: 10px;
+}
+
+.info2 h1{
+    font-size: 3em;
+    margin-top: 0;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 0;
+ }
+.info2 h3{
+    text-align: center;
+}
 
 
 /*** =========== ***/
@@ -88,6 +175,7 @@ object {
     width: 100%;
     margin-bottom: -3px;
     min-height: 425px;
+    border-radius: 5px;
 }
 
 
@@ -103,6 +191,30 @@ object {
     border-radius: 5px;
     cursor: pointer;   
     color: white; 
+}
+
+.login, .register{
+    font-family: Lato;
+    font-size: 1.5em;
+    height: 70px;
+    width: 50%;
+    float: left;
+    font-weight: 200;
+    line-height: 3em;
+    padding: 0;
+}
+
+.login:hover { background-color: #1fa67a; }
+.login{
+    background-color: #1dbb86;
+    border-radius: 5px 0 0 5px;
+    /*float: left;*/
+}
+
+.register:hover { background-color: rgb(1, 103, 143); }
+.register {
+    background-color: rgb(0, 129, 180);
+    border-radius: 0 5px 5px 0;
 }
 
 .btn.download { background-color: #1dbb86; width: 100%;}
@@ -140,7 +252,9 @@ object {
 @media (max-width: 768px) {
     .col-sm-12 {width: 100%; margin-bottom: 30px;}
     .col-sm-4 {margin-bottom: 30px;}
-
+    .col-xs-12{width: 100%}
+    .col-xs-6 { width: 48%; margin: 1%;}
+    .col-xs-6.flex { flex: 0 1 51%; margin: 15px auto;}
 }
 
 @media (min-width: 768px) {
@@ -148,7 +262,9 @@ object {
         width: 750px;
     } 
     .col-sm-4 {width: 31%; margin: 1.16%}
-
+    .col-sm-6 {width: 46%; margin: 1%}
+    .col-sm-8 {width: 64%; margin: 1%;}
+    .col-sm-6.desc, .col-sm-6.thumbnail {width: 48%; margin: 1%}
     .col-sm-12 {width: 100%; margin-bottom: 30px;}
 
 
@@ -165,7 +281,7 @@ object {
     .col-md-6 {width: 46%; margin: 1% }
     .col-md-8 {width: 65%; margin: 1%;}
 
-    
+    .md-center {margin: auto;}
 }
 @media (min-width: 1200px) {
     .container {
@@ -177,6 +293,8 @@ object {
     .nav .hidden {
         display: none;
     }
+    .col-xs-6.flex { flex: 0 1 100%; margin: 15px auto;}
+    /*.col-xs-6 { width: 100%}*/
     
 }
 
@@ -245,10 +363,28 @@ button.btn{
 }
 
 
+footer.footer{
+    background-color: #1fa67a;
+    color: #f1f1f1;
+    padding: 0;
+    line-height: 50px;
+    font-size: 15px;
+    font-weight: 300;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
 
+.last + footer.footer{
+    position: relative;
+}
+
+footer.footer p{
+    margin: 0;
+}
 
 /* Nav */
-.nav {
+.nav{
     height: 50px;
     background-color: #1fa67a;
     padding: 0;
@@ -331,6 +467,27 @@ button.btn{
 
 
 
+
+
+
+
+
+.show {
+    border-radius: 5px;
+    border: 1px solid rgb(39, 54, 70);
+}
+
+.show.empty{
+    min-height: 250px;
+}
+
+.show h2{
+    color: #1fa67a;
+    padding-left: 15px;
+}
+
+
+
 /*.modification.hidden textarea { display: none; }*/
 .modification.hidden { visibility: hidden; height: 0;}
 .modification {
@@ -339,10 +496,16 @@ button.btn{
     transition: height 5s ease-in-out;
 }
 
+
+#load-note:hover{
+    color: #1fa67a;
+}
 #load-note {
     cursor: pointer;
-    color: #808080;
+    color: #1dbb86;
     font-weight: 100;
+    margin-top: 10px;
+    display: inline-block;
 }
 
 .modification h4{
@@ -405,3 +568,4 @@ tbody tr:nth-child(2n) {
 .orders-table tr td:last{
     text-align: center;
 }
+
