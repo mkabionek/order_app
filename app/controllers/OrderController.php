@@ -34,6 +34,7 @@ class OrderController extends Controller {
             $this->partial("header");
             $this->view('order/show', ["order" => $order]);
             $this->partial("footer");
+            echo "<script src=\"/app/assets/js/show.js\"></script>";
         }else {
             $this->redirect('/');
         }
@@ -71,7 +72,7 @@ class OrderController extends Controller {
         }
     }
 
-    public function accept($params=[]){
+    public function take($params=[]){
         $user = $this->model('User');
         if (!$user->is_logged_in() || $user->get_type() != User::$DESIGNER_TYPE){
             $this->redirect("/");
@@ -83,7 +84,15 @@ class OrderController extends Controller {
         }else{
             echo 'nie ok';
         }
+    }
 
+    public function accept(){
+        $orderModel = $this->model('Order');
+        if ($orderModel->accept($_POST)){
+            echo 'OK';
+        }else {
+            echo "Error";
+        }
     }
 
     public function edit($params = []){

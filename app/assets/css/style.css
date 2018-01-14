@@ -294,6 +294,9 @@ object {
         display: none;
     }
     .col-xs-6.flex { flex: 0 1 100%; margin: 15px auto;}
+    .show + footer.footer {
+        position: relative!important;
+    }
     /*.col-xs-6 { width: 100%}*/
     
 }

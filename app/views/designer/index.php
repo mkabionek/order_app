@@ -22,7 +22,7 @@
                     echo "<td>".$order['category']."</td>";
                     echo "<td>".$order['info']."</td>";
                     echo "<td>".$order['username']."</td>";
-                    echo "<td><form action='/order/accept/".$order['order_id']."'><button class='btn'>Accept</button></form></td> </tr>";
+                    echo "<td><form action='/order/take/".$order['order_id']."'><button class='btn'>Accept</button></form></td> </tr>";
                 }
                 ?>
 

@@ -232,9 +232,20 @@ class Order extends Model {
                 return false;
             }
         }
+    }
 
-
-
+    public function accept($data){
+        $order_id = $data['order_id'];
+        $query = "UPDATE `order`
+                  SET `status_id` = 1
+                  WHERE `id` = :order_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(":order_id", $order_id);
+        if ($stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
